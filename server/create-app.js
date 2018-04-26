@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const getSummoner = require('./get-summoner')
+const getIcon = require('./get-icon')
 
 module.exports = function createApp() {
   const app = express()
@@ -21,6 +22,18 @@ module.exports = function createApp() {
         return err
       }
       res.json(summoner)
+    })
+  })
+
+  app.get('/icon', (req, res) => {
+    const id = req.query.id
+    getIcon(id, (err, icon) => {
+      if (err) {
+        res.sendStatus(500)
+        console.error(err)
+        return err
+      }
+      res.json(icon)
     })
   })
 

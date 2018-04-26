@@ -7,37 +7,35 @@ export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      summoner: null,
-      summonerName: null,
-      summonerLevel: null
+      input: '',
+      summoner: null
     }
-    this.handleClick = this.handleClick.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
     this.handleInput = this.handleInput.bind(this)
   }
-  handleClick() {
-    fetch('/search?name=' + this.state.summoner)
+  handleSearch() {
+    fetch('/search?name=' + this.state.input)
       .then(res => res.json())
       .then(summoner =>
         this.setState({
-          summonerName: summoner.name,
-          summonerLevel: summoner.summonerLevel
+          summoner: summoner
         })
       )
   }
   handleInput(event) {
-    this.setState({ summoner: event.target.value })
+    this.setState({ input: event.target.value })
   }
   render() {
-    const stats = this.state.summonerName ? (
-      <SummonerStats summoner={this.state} />
+    const stats = this.state.summoner ? (
+      <SummonerStats summoner={this.state.summoner} />
     ) : (
       <div />
     )
     return (
-      <div className="h-50 d-flex align-content-center">
+      <div className="h-75 d-flex align-content-center">
         <div className="col-4 mx-auto my-auto">
           <Logo />
-          <Search input={this.handleInput} click={this.handleClick} />
+          <Search input={this.handleInput} click={this.handleSearch} />
           {stats}
         </div>
       </div>
