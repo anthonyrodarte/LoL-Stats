@@ -32,11 +32,26 @@ export default class App extends React.Component {
       <div />
     )
     return (
-      <div className="h-75 d-flex align-content-center">
-        <div className="col-4 mx-auto my-auto">
-          <Logo />
-          <Search input={this.handleInput} click={this.handleSearch} />
-          {stats}
+      <div className="container-fluid h-100">
+        <div className="row h-25" />
+        <div className="row">
+          <div className="col-4" />
+          <div className="col-4">
+            <Logo />
+          </div>
+          <div className="col-4" />
+        </div>
+        <div className="row my-5">
+          <div className="col-4" />
+          <div className="col-4">
+            <Search input={this.handleInput} click={this.handleSearch} />
+          </div>
+          <div className="col-4" />
+        </div>
+        <div className="row">
+          <div className="col-4" />
+          <div className="col-4">{stats}</div>
+          <div className="col-4" />
         </div>
       </div>
     )

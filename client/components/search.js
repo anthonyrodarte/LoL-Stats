@@ -3,7 +3,7 @@ import React from 'react'
 export default function Search(props) {
   return (
     <div>
-      <div className="input-group mt-5">
+      <div className="input-group">
         <input
           type="text"
           className="form-control"

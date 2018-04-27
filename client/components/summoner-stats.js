@@ -5,39 +5,33 @@ export default class SummonerStats extends React.Component {
     super(props)
     this.state = {
       iconId: this.props.summoner.profileIconId,
-      icon: null
+      icon: 1
     }
   }
-  componentDidMount() {
-    fetch('/icon?id=' + this.state.iconId)
-      .then(res => res.json())
-      .then(icon =>
-        this.setState({
-          icon: icon
-        })
-      )
-  }
   render() {
-    const url = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/'
     const icon = this.state.icon ? (
       <img
-        src={url + this.state.icon.image.full}
+        src="../../images/testicon.png"
         className="border-dark img-thumbnail float-left"
-        style={{ width: 150, height: 150 }}
+        style={{ width: 150 }}
       />
     ) : (
       <div />
     )
     const summoner = this.props.summoner
     return (
-      <div className="my-5 container">
+      <div className="container">
         <div className="row">
-          <div className="col-sm">{icon}</div>
-          <div className="col-sm">
-            <h1 className="mb-3">{summoner.name}</h1>
-            <p>Summoner Level: {summoner.summonerLevel}</p>
+          <div className="col">
+            {icon}
+            <div className="row">
+              <div className="col-1" />
+              <div className="col">
+                <h2 className="mb-3 ">{summoner.name}</h2>
+                <p>Summoner Level: {summoner.summonerLevel}</p>
+              </div>
+            </div>
           </div>
-          <div className="col-sm" />
         </div>
       </div>
     )
