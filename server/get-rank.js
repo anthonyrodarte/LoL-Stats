@@ -2,19 +2,18 @@ const request = require('request')
 
 const baseUrl = 'https://na1.api.riotgames.com'
 
-const getIconUrl = '/lol/static-data/v3/profile-icons'
+const getRankUrl = '/lol/league/v3/positions/by-summoner/'
 
 const apiKeyURL = '?api_key=' + process.env.API_KEY
 
-function getIcon(id, callback) {
-  const url = baseUrl + getIconUrl + apiKeyURL
+function getRank(id, callback) {
+  const url = baseUrl + getRankUrl + id + apiKeyURL
   request(url, { json: true }, (err, response, body) => {
     if (err) {
       return callback(err)
     }
-    const icon = body.data[id]
-    callback(null, icon)
+    callback(null, body)
   })
 }
 
-module.exports = getIcon
+module.exports = getRank
