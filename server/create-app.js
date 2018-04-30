@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const getSummoner = require('./get-summoner')
 const getIcon = require('./get-icon')
 const getRank = require('./get-rank')
+const getMatches = require('./get-matches')
 
 module.exports = function createApp() {
   const app = express()
@@ -29,6 +30,18 @@ module.exports = function createApp() {
   app.get('/rank', (req, res) => {
     const id = req.query.id
     getRank(id, (err, rank) => {
+      if (err) {
+        res.sendStatus(500)
+        console.error(err)
+        return err
+      }
+      res.json(rank)
+    })
+  })
+
+  app.get('/matches', (req, res) => {
+    const id = req.query.id
+    getMatches(id, (err, rank) => {
       if (err) {
         res.sendStatus(500)
         console.error(err)
