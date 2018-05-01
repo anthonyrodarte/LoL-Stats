@@ -5,8 +5,18 @@ export default class SummonerStats extends React.Component {
     super(props)
     this.state = {
       iconId: this.props.summoner.profileIconId,
-      icon: 1
+      icon: 1,
+      rank: null
     }
+  }
+  componentDidMount() {
+    fetch('/rank?id=' + this.props.summoner.id)
+      .then(res => res.json())
+      .then(rank =>
+        this.setState({
+          rank: rank[0]
+        })
+      )
   }
   render() {
     const icon = (
@@ -16,13 +26,12 @@ export default class SummonerStats extends React.Component {
         style={{ width: 150 }}
       />
     )
+    const rankIconURL = this.state.rank
+      ? '../../images/' + this.state.rank.tier + '.png'
+      : ''
 
     const rankIcon = (
-      <img
-        src="../../images/gold.png"
-        className="float-right"
-        style={{ width: 150 }}
-      />
+      <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
     )
 
     const summoner = this.props.summoner
