@@ -6,8 +6,10 @@ export default class SummonerStats extends React.Component {
     this.state = {
       iconId: this.props.summoner.profileIconId,
       icon: 1,
-      rank: null
+      rank: null,
+      matches: null
     }
+    this.checkState = this.checkState.bind(this)
   }
   componentDidMount() {
     fetch('/rank?id=' + this.props.summoner.id)
@@ -17,6 +19,16 @@ export default class SummonerStats extends React.Component {
           rank: rank[0]
         })
       )
+    fetch('/matches?id=' + this.props.summoner.accountId)
+      .then(res => res.json())
+      .then(matchList =>
+        this.setState({
+          matches: matchList.matches.slice(0, 5)
+        })
+      )
+  }
+  checkState() {
+    console.log(this.state)
   }
   render() {
     const icon = (
