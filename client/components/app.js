@@ -1,5 +1,4 @@
 import React from 'react'
-import Logo from './logo'
 import Search from './search'
 import SummonerStats from './summoner-stats'
 
@@ -26,18 +25,14 @@ export default class App extends React.Component {
     this.setState({ input: event.target.value })
   }
   render() {
-    const stats = this.state.summoner ? (
-      <SummonerStats summoner={this.state.summoner} />
-    ) : (
-      <div />
-    )
-    return (
+    const stats = <SummonerStats summoner={this.state.summoner} />
+    return !this.state.summoner ? (
       <div className="container-fluid h-100">
         <div className="row h-25" />
         <div className="row">
           <div className="col-4" />
-          <div className="col-4">
-            <Logo />
+          <div className="col-4 text-center">
+            <img src="../../images/logo.png" />
           </div>
           <div className="col-4" />
         </div>
@@ -48,12 +43,9 @@ export default class App extends React.Component {
           </div>
           <div className="col-4" />
         </div>
-        <div className="row">
-          <div className="col-4" />
-          <div className="col-4">{stats}</div>
-          <div className="col-4" />
-        </div>
       </div>
+    ) : (
+      <div>{stats}</div>
     )
   }
 }
