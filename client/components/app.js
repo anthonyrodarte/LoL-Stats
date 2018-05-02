@@ -11,6 +11,7 @@ export default class App extends React.Component {
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleInput = this.handleInput.bind(this)
+    this.reset = this.reset.bind(this)
   }
   handleSearch() {
     fetch('/search?name=' + this.state.input)
@@ -21,11 +22,19 @@ export default class App extends React.Component {
         })
       )
   }
+  reset() {
+    this.setState({
+      input: '',
+      summoner: null
+    })
+  }
   handleInput(event) {
     this.setState({ input: event.target.value })
   }
   render() {
-    const stats = <SummonerStats summoner={this.state.summoner} />
+    const stats = (
+      <SummonerStats summoner={this.state.summoner} reset={this.reset} />
+    )
     return !this.state.summoner ? (
       <div className="container-fluid h-100">
         <div className="row h-25" />

@@ -7,10 +7,12 @@ export default class SummonerStats extends React.Component {
       iconId: this.props.summoner.profileIconId,
       icon: 1,
       rank: null,
-      matches: null
+      matches: null,
+      matchesDetails: null
     }
-    this.checkState = this.checkState.bind(this)
+    this.findPlayer = this.findPlayer.bind(this)
   }
+
   componentDidMount() {
     fetch('/rank?id=' + this.props.summoner.id)
       .then(res => res.json())
@@ -21,16 +23,42 @@ export default class SummonerStats extends React.Component {
       )
     fetch('/matches?id=' + this.props.summoner.accountId)
       .then(res => res.json())
-      .then(matchList =>
+      .then(matchList => {
+        const recentMatches = matchList.matches.slice(0, 5)
         this.setState({
-          matches: matchList.matches.slice(0, 5)
+          matches: recentMatches
+        })
+        return recentMatches
+      })
+      .then(recentMatches => {
+        return Promise.all(
+          recentMatches.map(match => {
+            return fetch('/match?id=' + match.gameId).then(res => res.json())
+          })
+        )
+      })
+      .then(matchesJSON =>
+        this.setState({
+          matchesDetails: matchesJSON
         })
       )
   }
-  checkState() {
-    console.log(this.state)
+  findPlayer(i) {
+    const match = this.state.matchesDetails[i].participantIdentities
+
+    const participant = match.find(players => {
+      return players.player.summonerName === this.props.summoner.name
+    })
+
+    const participantList = this.state.matchesDetails[i].participants
+
+    const findParticipant = participantList.find(player => {
+      return player.participantId === participant.participantId
+    })
+    console.log(findParticipant.stats.win)
   }
   render() {
+    const summoner = this.props.summoner
     const icon = (
       <img
         src="../../images/testicon.png"
@@ -41,12 +69,9 @@ export default class SummonerStats extends React.Component {
     const rankIconURL = this.state.rank
       ? '../../images/' + this.state.rank.tier + '.png'
       : ''
-
     const rankIcon = (
       <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
     )
-
-    const summoner = this.props.summoner
     return (
       <div>
         <div className="container">
@@ -54,9 +79,11 @@ export default class SummonerStats extends React.Component {
             src="../../images/logo.png"
             className="mb-2"
             style={{ width: 200 }}
+            onClick={this.props.reset}
           />
           <div
             className="row border border-dark"
+            onClick={this.findPlayer}
             style={{
               height: '200px',
               backgroundImage: 'url(../../images/banner.jpg)',
