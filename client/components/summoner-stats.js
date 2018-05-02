@@ -55,7 +55,13 @@ export default class SummonerStats extends React.Component {
     const findParticipant = participantList.find(player => {
       return player.participantId === participant.participantId
     })
-    console.log(findParticipant.stats.win)
+    if (findParticipant.stats.win === true) {
+      return 'Win'
+    }
+    else if (findParticipant.stats.win === false) return 'Loss'
+    else {
+      return 'Remake'
+    }
   }
   render() {
     const summoner = this.props.summoner
@@ -71,6 +77,15 @@ export default class SummonerStats extends React.Component {
       : ''
     const rankIcon = (
       <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
+    )
+    const matchHistoryList = this.state.matchesDetails ? (
+      this.state.matchesDetails.map((match, i) => (
+        <div key={i} className="row border border-dark mx-5 my-1">
+          <p className="my-0 mx-auto">{this.findPlayer(i)}</p>
+        </div>
+      ))
+    ) : (
+      <div />
     )
     return (
       <div>
@@ -109,21 +124,7 @@ export default class SummonerStats extends React.Component {
         <div style={{ height: 150 }} />
         <div className="container text-center">
           <h6>Recent Matches</h6>
-          <div className="row win border border-dark mx-5 my-1">
-            <p className="my-0 mx-auto">win</p>
-          </div>
-          <div className="row loss border border-dark mx-5 my-1">
-            <p className="my-0 mx-auto">loss</p>
-          </div>
-          <div className="row win border border-dark mx-5 my-1">
-            <p className="my-0 mx-auto">win</p>
-          </div>
-          <div className="row loss border border-dark mx-5 my-1">
-            <p className="my-0 mx-auto">loss</p>
-          </div>
-          <div className="row win border border-dark mx-5 my-1">
-            <p className="my-0 mx-auto">win</p>
-          </div>
+          {matchHistoryList}
         </div>
       </div>
     )
