@@ -65,6 +65,11 @@ export default class SummonerStats extends React.Component {
   }
   render() {
     const summoner = this.props.summoner
+    const rank = this.state.rank ? (
+      <p className="lead">Rank: {this.state.rank.tier}</p>
+    ) : (
+      <p className="lead">Unranked</p>
+    )
     const icon = (
       <img
         src="../../images/testicon.png"
@@ -75,8 +80,10 @@ export default class SummonerStats extends React.Component {
     const rankIconURL = this.state.rank
       ? '../../images/' + this.state.rank.tier + '.png'
       : ''
-    const rankIcon = (
+    const rankIcon = this.state.rank ? (
       <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
+    ) : (
+      <div className="float-right" style={{ width: 150, height: 150 }} />
     )
     const matchHistoryList = this.state.matchesDetails ? (
       this.state.matchesDetails.map((match, i) => (
@@ -98,7 +105,6 @@ export default class SummonerStats extends React.Component {
           />
           <div
             className="row border border-dark"
-            onClick={this.findPlayer}
             style={{
               height: '200px',
               backgroundImage: 'url(../../images/banner.jpg)',
@@ -111,10 +117,9 @@ export default class SummonerStats extends React.Component {
               {icon}
               {rankIcon}
               <div className="row">
-                <div className="col-1" />
                 <div className="col text-light text-center">
                   <h2 className="mb-3 display-4">{summoner.name}</h2>
-                  <p className="lead">Rank: Gold</p>
+                  {rank}
                   <p>Summoner Level: {summoner.summonerLevel}</p>
                 </div>
               </div>
