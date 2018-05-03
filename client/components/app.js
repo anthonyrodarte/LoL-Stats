@@ -48,18 +48,29 @@ export default class App extends React.Component {
   handleInput(event) {
     this.setState({ input: event.target.value })
   }
-  render() {
-    const errorMsg = this.state.invalidSearch ? (
+  renderErrorMsg(message) {
+    if (!message) {
+      return null
+    }
+    return (
       <div className="my-5 alert alert-danger" role="alert">
-        {this.state.invalidSearch}
+        {message}
       </div>
-    ) : (
-      <div />
     )
+  }
+  renderStats() {
     const stats = (
       <SummonerStats summoner={this.state.summoner} reset={this.reset} />
     )
-    return !this.state.summoner ? (
+    return stats
+  }
+  render() {
+    const {summoner, invalidSearch} = this.state
+
+    if (summoner) {
+      return <div>{this.renderStats()}</div>
+    }
+    return (
       <div className="container-fluid h-100">
         <div className="row h-25" />
         <div className="row">
@@ -73,7 +84,7 @@ export default class App extends React.Component {
           <div className="col-4" />
           <div className="col-4">
             <Search input={this.handleInput} click={this.handleSearch} />
-            {errorMsg}
+            {this.renderErrorMsg(invalidSearch)}
           </div>
           <div className="col-4" />
         </div>
@@ -82,8 +93,6 @@ export default class App extends React.Component {
           <div className="col-4" />
         </div>
       </div>
-    ) : (
-      <div>{stats}</div>
     )
   }
 }
