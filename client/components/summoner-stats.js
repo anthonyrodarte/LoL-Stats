@@ -8,9 +8,8 @@ export default class SummonerStats extends React.Component {
       iconId: this.props.summoner.profileIconId,
       icon: 1,
       rank: null,
-      matchesDetails: null
+      matchesDetails: []
     }
-    this.findPlayer = this.findPlayer.bind(this)
   }
 
   componentDidMount() {
@@ -23,36 +22,37 @@ export default class SummonerStats extends React.Component {
     api.matches(this.props.summoner.accountId)
       .then(matchesJSON =>
         this.setState({
-          matchesDetails: matchesJSON
+          matchesDetails: this.getMatchResults(this.props.summoner.name, matchesJSON)
         })
       )
   }
-  findPlayer(i) {
-    const match = this.state.matchesDetails[i].participantIdentities
-
-    const participant = match.find(players => {
-      return players.player.summonerName === this.props.summoner.name
-    })
-
-    const participantList = this.state.matchesDetails[i].participants
-
-    const findParticipant = participantList.find(player => {
-      return player.participantId === participant.participantId
-    })
-    if (findParticipant.stats.win === true) {
-      return 'Win'
+  getMatchResults(name, matches) {
+    let matchResults = []
+    for (let i = 0; i < matches.length; i++) {
+      const identities = matches[i].participantIdentities
+      const identity = identities.find(player => {
+        return player.player.summonerName === name
+      })
+      const id = identity.participantId
+      const playerStats = matches[i].participants.find(participant => {
+        return participant.participantId === id
+      })
+      if (playerStats.stats.win) {
+        matchResults.push('Win')
+      }
+      else {
+        matchResults.push('Loss')
+      }
     }
-    else if (findParticipant.stats.win === false) return 'Loss'
-    else {
-      return 'Remake'
-    }
+    return matchResults
   }
   render() {
+    const {rank, matchesDetails} = this.state
     const summoner = this.props.summoner
-    const rank = this.state.rank ? (
-      <p className="lead">Rank: {this.state.rank.tier}</p>
-    ) : (
-      <p className="lead">Unranked</p>
+    const rankTitle = (
+      <p className="lead">
+        { rank ? 'Rank: ' + rank.tier : 'Unranked'}
+      </p>
     )
     const icon = (
       <img
@@ -61,23 +61,20 @@ export default class SummonerStats extends React.Component {
         style={{ width: 150 }}
       />
     )
-    const rankIconURL = this.state.rank
-      ? '../../images/' + this.state.rank.tier + '.png'
+    const rankIconURL = rank
+      ? '../../images/' + rank.tier + '.png'
       : ''
-    const rankIcon = this.state.rank ? (
+    const rankIcon = rank ? (
       <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
     ) : (
       <div className="float-right" style={{ width: 150, height: 150 }} />
     )
-    const matchHistoryList = this.state.matchesDetails ? (
-      this.state.matchesDetails.map((match, i) => (
+    const matchHistoryList =
+      matchesDetails.map((result, i) => (
         <div key={i} className="row border border-dark mx-5 my-1">
-          <p className="my-0 mx-auto">{this.findPlayer(i)}</p>
+          <p className="my-0 mx-auto">{result}</p>
         </div>
       ))
-    ) : (
-      <div />
-    )
     return (
       <div>
         <div className="container">
@@ -103,7 +100,7 @@ export default class SummonerStats extends React.Component {
               <div className="row">
                 <div className="col text-light text-center">
                   <h2 className="mb-3 display-4">{summoner.name}</h2>
-                  {rank}
+                  {rankTitle}
                   <p>Summoner Level: {summoner.summonerLevel}</p>
                 </div>
               </div>
