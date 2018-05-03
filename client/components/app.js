@@ -1,6 +1,7 @@
 import React from 'react'
 import Search from './search'
 import SummonerStats from './summoner-stats'
+import api from './api'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,23 +19,23 @@ export default class App extends React.Component {
     this.setState({
       invalidSearch: null
     })
-    this.state.input
-      ? fetch('/search?name=' + this.state.input)
-        .then(res => res.json())
-        .then(response => {
-          if (response.status) {
-            this.setState({
-              invalidSearch: 'Summoner not found.'
-            })
-          }
-          else {
-            this.setState({
-              summoner: response
-            })
-          }
-        })
-      : this.setState({
+    if (!this.state.input) {
+      this.setState({
         invalidSearch: 'Please enter a summoner name.'
+      })
+      return
+    }
+    api.search(this.state.input)
+      .then(summoner => {
+        if (!summoner) {
+          this.setState({
+            invalidSearch: 'Summoner not found.'
+          })
+          return
+        }
+        this.setState({
+          summoner: summoner
+        })
       })
   }
   reset() {

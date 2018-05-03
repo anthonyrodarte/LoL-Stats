@@ -1,4 +1,5 @@
 import React from 'react'
+import api from './api'
 
 export default class SummonerStats extends React.Component {
   constructor(props) {
@@ -7,36 +8,19 @@ export default class SummonerStats extends React.Component {
       iconId: this.props.summoner.profileIconId,
       icon: 1,
       rank: null,
-      matches: null,
       matchesDetails: null
     }
     this.findPlayer = this.findPlayer.bind(this)
   }
 
   componentDidMount() {
-    fetch('/rank?id=' + this.props.summoner.id)
-      .then(res => res.json())
+    api.rank(this.props.summoner.id)
       .then(rank =>
         this.setState({
           rank: rank[0]
         })
       )
-    fetch('/matches?id=' + this.props.summoner.accountId)
-      .then(res => res.json())
-      .then(matchList => {
-        const recentMatches = matchList.matches.slice(0, 5)
-        this.setState({
-          matches: recentMatches
-        })
-        return recentMatches
-      })
-      .then(recentMatches => {
-        return Promise.all(
-          recentMatches.map(match => {
-            return fetch('/match?id=' + match.gameId).then(res => res.json())
-          })
-        )
-      })
+    api.matches(this.props.summoner.accountId)
       .then(matchesJSON =>
         this.setState({
           matchesDetails: matchesJSON
