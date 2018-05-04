@@ -9,3 +9,11 @@ body {
 #app {
   height: 100%;
 }
+
+.win {
+  background-color: #53cfbe;
+}
+
+.loss {
+  background-color: #fb6573;
+}
