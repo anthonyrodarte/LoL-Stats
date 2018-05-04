@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
+    "test": "mocha",
+    "tdd": "mocha -w -R min",
     "bundle": "browserify -t babelify client/ -o server/public/main.js",
     "watch:server": "nodemon server/index.js",
     "watch:bundle": "watchify -vd -t babelify client/ -o server/public/main.js",
