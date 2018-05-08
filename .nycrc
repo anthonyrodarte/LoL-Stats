@@ -1,0 +1,14 @@
+{
+  "all": true,
+  "exclude": [
+    "coverage/",
+    "client/",
+    "server/public/",
+    "test/",
+    "server/index.js"
+  ],
+  "reporter": [
+    "lcov",
+    "text-summary"
+  ]
+}

@@ -53,3 +53,5 @@ typings/
 
 .env
 server/public/main.js
+
+.nyc_output/
