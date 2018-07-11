@@ -5,7 +5,7 @@
     "A web application for summoners who want to view their statistics.",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "npm run bundle && node server/index.js",
     "bundle": "browserify -t babelify client/ -o server/public/main.js",
     "watch:server": "nodemon server/index.js",
     "watch:bundle": "watchify -vd -t babelify client/ -o server/public/main.js",
