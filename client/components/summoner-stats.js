@@ -71,7 +71,7 @@ export default class SummonerStats extends React.Component {
     )
     const matchHistoryList =
       matchesDetails.map((result, i) => (
-        <div key={i} className="row border border-dark mx-5 my-1">
+        <div key={i} className="row border border-dark mx-5 my-3 alert-secondary">
           <p className="my-0 mx-auto">{result}</p>
         </div>
       ))
@@ -109,7 +109,8 @@ export default class SummonerStats extends React.Component {
         </div>
         <div style={{ height: 150 }} />
         <div className="container text-center">
-          <h6>Recent Matches</h6>
+          <p className="h3">Recent Matches</p>
+          <hr/>
           {matchHistoryList}
         </div>
       </div>
