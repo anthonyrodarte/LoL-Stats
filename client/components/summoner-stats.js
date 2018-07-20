@@ -47,6 +47,7 @@ export default class SummonerStats extends React.Component {
     return matchResults
   }
   render() {
+    const profileIconURL = 'http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/' + this.state.iconId + '.png'
     const {rank, matchesDetails} = this.state
     const summoner = this.props.summoner
     const rankTitle = (
@@ -56,7 +57,7 @@ export default class SummonerStats extends React.Component {
     )
     const icon = (
       <img
-        src="../../images/testicon.png"
+        src={profileIconURL}
         className="border border-light float-left"
         style={{ width: 150 }}
       />
