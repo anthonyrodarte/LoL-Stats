@@ -5,15 +5,6 @@ const baseUrl = 'https://na1.api.riotgames.com'
 const apiKeyURL = '?api_key=' + process.env.API_KEY
 
 const riot = {
-  getIcon(id, callback) {
-    const getIconUrl = '/lol/static-data/v3/profile-icons'
-    const url = baseUrl + getIconUrl + apiKeyURL
-    request(url, { json: true }, (err, response, body) => {
-      if (err) return callback(err)
-      const icon = body.data[id]
-      callback(null, icon)
-    })
-  },
   getMatchHistory(id, callback) {
     const getMatchHistoryUrl = '/lol/match/v3/matchlists/by-account/'
     const url = baseUrl + getMatchHistoryUrl + id + apiKeyURL

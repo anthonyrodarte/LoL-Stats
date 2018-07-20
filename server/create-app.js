@@ -44,14 +44,6 @@ module.exports = function createApp() {
     })
   })
 
-  app.get('/icon', (req, res, next) => {
-    const id = req.query.id
-    riot.getIcon(id, (err, icon) => {
-      if (err) return next(err)
-      res.json(icon)
-    })
-  })
-
   app.use((err, req, res, next) => {
     res.sendStatus(500)
     console.error(err)
