@@ -63,7 +63,7 @@ export default class SummonerStats extends React.Component {
       />
     )
     const rankIconURL = rank
-      ? '../../images/' + rank.tier + '.png'
+      ? '../../images/' + rank.tier.toLowerCase() + '.png'
       : ''
     const rankIcon = rank ? (
       <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
