@@ -1,5 +1,7 @@
 import React from 'react'
 import api from './api'
+import { Container, Row, Col } from 'reactstrap'
+
 
 export default class SummonerStats extends React.Component {
   constructor(props) {
