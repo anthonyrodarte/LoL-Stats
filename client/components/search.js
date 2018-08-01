@@ -1,25 +1,24 @@
 import React from 'react'
+import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap'
 
 export default function Search(props) {
   return (
-    <div>
-      <div className="input-group">
-        <input
+    <form>
+      <InputGroup>
+        <Input
           type="text"
-          className="form-control"
           placeholder="Summoner"
           onInput={props.input}
         />
-        <div className="input-group-append">
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
+        <InputGroupAddon addonType="append">
+          <Button
+            outline color="secondary"
             onClick={props.click}
           >
             Search
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </InputGroupAddon>
+      </InputGroup>
+    </form>
   )
 }

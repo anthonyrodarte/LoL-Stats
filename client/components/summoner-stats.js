@@ -1,5 +1,7 @@
 import React from 'react'
 import api from './api'
+import Search from './search'
+import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap'
 
 export default class SummonerStats extends React.Component {
   constructor(props) {
@@ -58,63 +60,90 @@ export default class SummonerStats extends React.Component {
     const icon = (
       <img
         src={profileIconURL}
-        className="border border-light float-left"
-        style={{ width: 150 }}
+        className="img-thumbnail"
       />
     )
     const rankIconURL = rank
       ? '../../images/' + rank.tier.toLowerCase() + '.png'
       : ''
-    const rankIcon = rank ? (
-      <img src={rankIconURL} className="float-right" style={{ width: 150 }} />
-    ) : (
-      <div className="float-right" style={{ width: 150, height: 150 }} />
+    const rankIcon = (
+      <img src={rankIconURL} className="img-fluid" />
     )
     const matchHistoryList =
       matchesDetails.map((result, i) => (
-        <div key={i} className="row border border-dark mx-5 my-3 alert-secondary">
-          <p className="my-0 mx-auto">{result}</p>
-        </div>
+        <ListGroup key={i} className="row mx-5">
+          <ListGroupItem color="secondary" className="my-1 text-center">{result}</ListGroupItem>
+        </ListGroup>
       ))
     return (
-      <div>
-        <div className="container">
-          <img
-            src="../../images/logo.png"
-            className="mb-2"
-            style={{ width: 200 }}
-            onClick={this.props.reset}
-          />
-          <div
-            className="row border border-dark"
-            style={{
-              height: '200px',
-              backgroundImage: 'url(../../images/banner.jpg)',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover'
-            }}
-          >
-            <div className="col" style={{ marginTop: 25 }}>
-              {icon}
-              {rankIcon}
-              <div className="row">
-                <div className="col text-light text-center">
-                  <h2 className="mb-3 display-4">{summoner.name}</h2>
-                  {rankTitle}
-                  <p>Summoner Level: {summoner.summonerLevel}</p>
-                </div>
-              </div>
+      <Container>
+        <Row className="d-flex align-items-center mb-2">
+          <Col>
+            <img
+              src="../../images/logo.png"
+              style={{ width: 200 }}
+              onClick={this.props.reset}
+            />
+          </Col>
+        </Row>
+        <Row className="d-flex align-items-center">
+          <Col xs="2" className="my-1">
+            {icon}
+          </Col>
+          <Col>
+            <div className="col text-dark text-center">
+              <h2 className="mb-3 display-4">{summoner.name}</h2>
+              {rankTitle}
+              <p>Summoner Level: {summoner.summonerLevel}</p>
             </div>
-          </div>
-        </div>
-        <div style={{ height: 150 }} />
-        <div className="container text-center">
-          <p className="h3">Recent Matches</p>
-          <hr/>
-          {matchHistoryList}
-        </div>
-      </div>
+          </Col>
+          <Col xs="2">
+            <div className="float-right">
+              {rankIcon}
+            </div>
+          </Col>
+        </Row>
+        <Row className="my-5"/>
+        <Row>
+          <Col>
+            {matchHistoryList}
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
+//
+// <div className="row">
+//   <div className="col text-light text-center">
+//     <h2 className="mb-3 display-4">{summoner.name}</h2>
+//     {rankTitle}
+//     <p>Summoner Level: {summoner.summonerLevel}</p>
+//   </div>
+// </div>
+
+// <div className="container">
+//   <img
+//     src="../../images/logo.png"
+//     style={{ width: 200 }}
+//     onClick={this.props.reset}
+//   />
+//   <Row className="bg-dark">
+//     <div className="col" style={{ marginTop: 25 }}>
+//       {icon}
+//       {rankIcon}
+//       <div className="row">
+//         <div className="col text-light text-center">
+//           <h2 className="mb-3 display-4">{summoner.name}</h2>
+//           {rankTitle}
+//           <p>Summoner Level: {summoner.summonerLevel}</p>
+//         </div>
+//       </div>
+//     </div>
+//   </Row>
+// </div>
+// <div className="container text-center">
+//   <p className="h3">Recent Matches</p>
+//   <hr/>
+//   {matchHistoryList}
+// </div>
