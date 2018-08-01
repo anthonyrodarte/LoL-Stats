@@ -1,6 +1,6 @@
 import React from 'react'
 import Search from './search'
-import SummonerStats from './summoner-stats'
+import Summoner from './summoner'
 import api from './api'
 
 export default class App extends React.Component {
@@ -60,7 +60,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <SummonerStats summoner={this.state.summoner} reset={this.reset} />
+      <Summoner summoner={this.state.summoner} reset={this.reset} />
     )
     return stats
   }
