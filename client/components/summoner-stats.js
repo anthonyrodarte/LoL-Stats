@@ -72,7 +72,7 @@ export default class SummonerStats extends React.Component {
     const matchHistoryList =
       matchesDetails.map((result, i) => (
         <ListGroup key={i} className="row mx-5">
-          <ListGroupItem color="secondary" className="my-1">{result}</ListGroupItem>
+          <ListGroupItem color="secondary" className="my-1 text-center">{result}</ListGroupItem>
         </ListGroup>
       ))
     return (
@@ -86,12 +86,12 @@ export default class SummonerStats extends React.Component {
             />
           </Col>
         </Row>
-        <Row className="bg-dark d-flex align-items-center">
+        <Row className="d-flex align-items-center">
           <Col xs="2" className="my-1">
             {icon}
           </Col>
           <Col>
-            <div className="col text-light text-center">
+            <div className="col text-dark text-center">
               <h2 className="mb-3 display-4">{summoner.name}</h2>
               {rankTitle}
               <p>Summoner Level: {summoner.summonerLevel}</p>
@@ -101,6 +101,12 @@ export default class SummonerStats extends React.Component {
             <div className="float-right">
               {rankIcon}
             </div>
+          </Col>
+        </Row>
+        <Row className="my-5"/>
+        <Row>
+          <Col>
+            {matchHistoryList}
           </Col>
         </Row>
       </Container>
