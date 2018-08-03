@@ -1,8 +1,8 @@
 import React from 'react'
 import api from '../api'
-import Search from '../search'
 import SummonerInfo from './info'
-import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap'
+import Matches from './matches/matches'
+import { Container, Row } from 'reactstrap'
 
 export default class Summoner extends React.Component {
   constructor(props) {
@@ -53,6 +53,7 @@ export default class Summoner extends React.Component {
       <Container>
         <Row>
           <SummonerInfo icon={`http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
+          <Matches results={this.state.matchesDetails}/>
         </Row>
       </Container>
     )
@@ -122,7 +123,6 @@ export default class Summoner extends React.Component {
 //     </Row>
 //   </Container>
 // )
-
 
 //
 // <div className="row">

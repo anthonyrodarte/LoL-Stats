@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Col } from 'reactstrap'
 
 class Name extends Component {
   render() {

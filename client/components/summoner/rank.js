@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Row, Col } from 'reactstrap'
 
 class Rank extends Component {
   render() {
@@ -8,13 +9,15 @@ class Rank extends Component {
       const [first, ...rest] = tierSplit
 
       return (
-        <div>
-          <span className="text-muted">{`Rank: ${first}${rest
-            .join('')
-            .toLowerCase()}`}
-          </span>
-          <img src={`../../images/${tier.toLowerCase()}.png`} className="img-fluid"/>
-        </div>
+        <Row className="align-items-center">
+          <Col className='pr-0' >
+            <span className="text-muted">{`Rank: ${first}${rest
+              .join('')
+              .toLowerCase()}`}
+            </span>
+            <img src={`../../images/${tier.toLowerCase()}.png`} className="img-fluid w-25 ml-2"/>
+          </Col>
+        </Row>
       )
     }
 
