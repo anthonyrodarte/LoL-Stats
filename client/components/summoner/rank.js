@@ -10,12 +10,14 @@ class Rank extends Component {
 
       return (
         <Row className="align-items-center">
-          <Col className='pr-0' >
+          <Col xs='3' className='pr-0'>
+            <img src={`../../images/${tier.toLowerCase()}.png`} className="img-fluid"/>
+          </Col>
+          <Col xs='9' >
             <span className="text-muted">{`Rank: ${first}${rest
               .join('')
               .toLowerCase()}`}
             </span>
-            <img src={`../../images/${tier.toLowerCase()}.png`} className="img-fluid w-25 ml-2"/>
           </Col>
         </Row>
       )

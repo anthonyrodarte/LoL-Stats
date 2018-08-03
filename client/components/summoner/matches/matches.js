@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'reactstrap'
+import { Row, Col, Card, CardTitle, CardImg, CardImgOverlay } from 'reactstrap'
 
 class Matches extends Component {
   render() {
+    console.log(this.props)
     const matchHistoryList =
       this.props.results.map((result, i) => (
-        <Col key={i}>
-          <div className="bg-dark h-100 d-flex align-items-center justify-content-center">
-            <span className="text-light">{result}</span>
-          </div>
+        <Col key={i} className="pr-0">
+          <Card inverse className="rounded">
+            <CardImg width="100%" src="../../../images/zed.jpeg"/>
+            <CardImgOverlay className="d-flex align-items-center justify-content-center">
+              <CardTitle>{result}</CardTitle>
+            </CardImgOverlay>
+          </Card>
         </Col>
       ))
     return (

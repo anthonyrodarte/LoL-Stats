@@ -5,7 +5,7 @@ class Level extends Component {
   render() {
     return (
       <Row className="h-100 align-items-center">
-        <Col className="pl-0">
+        <Col>
           <span className="text-muted">Level: {this.props.level}
           </span>
         </Col>

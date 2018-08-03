@@ -8,7 +8,7 @@ import { Col, Row } from 'reactstrap'
 class SummonerInfo extends Component {
   render() {
     return (
-      <Col xs="4">
+      <Col xs="4 align-items-center my-auto">
         <Row className="align-items-center">
           <Col xs="2" className="pr-0">
             <Icon icon={this.props.icon} />
@@ -17,7 +17,7 @@ class SummonerInfo extends Component {
             <Name name={this.props.summoner.name} />
           </Col>
         </Row>
-        <Row className="mt-1 border border-dark">
+        <Row className="mt-1">
           <Col xs="6">
             <Rank rank={this.props.rank}/>
           </Col>

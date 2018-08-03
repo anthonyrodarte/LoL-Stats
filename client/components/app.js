@@ -76,11 +76,11 @@ export default class App extends React.Component {
         <div className="row">
           <div className="col-4" />
           <div className="col-4 text-center">
-            <img src="../../images/logo.png" className="img-fluid" />
+            <h1 className="text-light display-3">LoL Stats</h1>
           </div>
           <div className="col-4" />
         </div>
-        <div className="row my-5">
+        <div className="row my-1">
           <div className="col-4" />
           <div className="col-4">
             <Search input={this.handleInput} click={this.handleSearch} />

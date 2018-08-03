@@ -10,7 +10,8 @@ export default class Summoner extends React.Component {
     this.state = {
       iconId: this.props.summoner.profileIconId,
       rank: null,
-      matchesDetails: []
+      matchesDetails: [],
+      matchesResults: []
     }
   }
 
@@ -24,7 +25,8 @@ export default class Summoner extends React.Component {
     api.matches(this.props.summoner.accountId)
       .then(matchesJSON =>
         this.setState({
-          matchesDetails: this.getMatchResults(this.props.summoner.name, matchesJSON)
+          matchesDetails: matchesJSON,
+          matchesResults: this.getMatchResults(this.props.summoner.name, matchesJSON)
         })
       )
   }
@@ -50,10 +52,10 @@ export default class Summoner extends React.Component {
   }
   render() {
     return (
-      <Container>
-        <Row>
+      <Container className="p-3">
+        <Row className="bg-light p-3">
           <SummonerInfo icon={`http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
-          <Matches results={this.state.matchesDetails}/>
+          <Matches results={this.state.matchesResults} details={this.state.matchesDetails}/>
         </Row>
       </Container>
     )
