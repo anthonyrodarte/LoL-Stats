@@ -23,7 +23,14 @@ class Rank extends Component {
       )
     }
 
-    return <span>Rank: Unranked</span>
+    return (
+      <Row className="align-items-center">
+        <Col xs='12' >
+          <span className="text-muted">Rank: Unranked
+          </span>
+        </Col>
+      </Row>
+    )
   }
 }
 
