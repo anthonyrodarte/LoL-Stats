@@ -3,7 +3,6 @@ import { Row, Col, Card, CardTitle, CardImg, CardImgOverlay } from 'reactstrap'
 
 class Matches extends Component {
   render() {
-    console.log(this.props)
     const matchHistoryList =
       this.props.results.map((result, i) => (
         <Col key={i} className="pr-0">

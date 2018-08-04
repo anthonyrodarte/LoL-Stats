@@ -13,6 +13,7 @@ export default function Search(props) {
         <InputGroupAddon addonType="append">
           <Button
             onClick={props.click}
+            type="button"
           >
             Search
           </Button>
