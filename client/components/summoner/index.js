@@ -14,7 +14,6 @@ export default class Summoner extends React.Component {
       matchesResults: []
     }
   }
-
   componentDidMount() {
     api.rank(this.props.summoner.id)
       .then(rank =>
@@ -22,33 +21,6 @@ export default class Summoner extends React.Component {
           rank: rank[0]
         })
       )
-    api.matches(this.props.summoner.accountId)
-      .then(matchesJSON =>
-        this.setState({
-          matchesDetails: matchesJSON,
-          matchesResults: this.getMatchResults(this.props.summoner.name, matchesJSON)
-        })
-      )
-  }
-  getMatchResults(name, matches) {
-    let matchResults = []
-    for (let i = 0; i < matches.length; i++) {
-      const identities = matches[i].participantIdentities
-      const identity = identities.find(player => {
-        return player.player.summonerName === name
-      })
-      const id = identity.participantId
-      const playerStats = matches[i].participants.find(participant => {
-        return participant.participantId === id
-      })
-      if (playerStats.stats.win) {
-        matchResults.push('Win')
-      }
-      else {
-        matchResults.push('Loss')
-      }
-    }
-    return matchResults
   }
   render() {
     return (
@@ -60,7 +32,7 @@ export default class Summoner extends React.Component {
         </Row>
         <Row className="bg-light p-3">
           <SummonerInfo icon={`http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
-          <Matches results={this.state.matchesResults} details={this.state.matchesDetails}/>
+          <Matches results={this.state.matchesResults} details={this.state.matchesDetails} summoner={this.props.summoner}/>
         </Row>
       </Container>
     )
