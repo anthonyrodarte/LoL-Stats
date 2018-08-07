@@ -80,12 +80,12 @@ export default class App extends React.Component {
           </Col>
         </Row>
         <Row className='mt-4'>
-          <Col xs='3' />
-          <Col>
+          <Col />
+          <Col xs='5'>
             <Search input={this.handleInput} click={this.handleSearch} />
             {this.renderErrorMsg(invalidSearch)}
           </Col>
-          <Col xs='3' />
+          <Col />
         </Row>
       </Container>
     )

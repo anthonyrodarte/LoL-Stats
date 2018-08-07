@@ -31,6 +31,11 @@ const api = {
           })
         )
       })
+  },
+  icon() {
+    return fetch('http://ddragon.leagueoflegends.com/cdn/8.13.1/data/en_US/champion.json')
+      .then(res => res.json())
+      .then(champs => champs.data)
   }
 }
 

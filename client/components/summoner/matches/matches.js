@@ -11,6 +11,8 @@ class Matches extends Component {
     }
   }
   componentDidMount() {
+    api.icon()
+      .then(champs => console.log(champs))
     api.matches(this.props.summoner.accountId)
       .then(matchesJSON =>
         this.setState({
@@ -19,14 +21,18 @@ class Matches extends Component {
         })
       )
   }
+  getPlayerId(name, match) {
+    const identities = match.participantIdentities
+    const identity = identities.find(player => {
+      return player.player.summonerName === name
+    })
+    const id = identity.participantId
+    return id
+  }
   getMatchResults(name, matches) {
     let matchResults = []
     for (let i = 0; i < matches.length; i++) {
-      const identities = matches[i].participantIdentities
-      const identity = identities.find(player => {
-        return player.player.summonerName === name
-      })
-      const id = identity.participantId
+      const id = this.getPlayerId(this.props.summoner.name, matches[i])
       const playerStats = matches[i].participants.find(participant => {
         return participant.participantId === id
       })
@@ -40,6 +46,7 @@ class Matches extends Component {
     return matchResults
   }
   render() {
+    console.log(this.state)
     const matchHistoryList =
       this.state.matchesResults.map((result, i) => (
         <Col key={i} className="pr-0">
