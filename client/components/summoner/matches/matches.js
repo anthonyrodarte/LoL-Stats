@@ -7,12 +7,17 @@ class Matches extends Component {
     super(props)
     this.state = {
       matchesDetails: [],
-      matchesResults: []
+      matchesResults: [],
+      champData: null
     }
   }
   componentDidMount() {
     api.icon()
-      .then(champs => console.log(champs))
+      .then(champs =>
+        this.setState({
+          champData: champs
+        })
+      )
     api.matches(this.props.summoner.accountId)
       .then(matchesJSON =>
         this.setState({
