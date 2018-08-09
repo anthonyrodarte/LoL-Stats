@@ -1,7 +1,8 @@
 import React from 'react'
 import Search from './search'
-import SummonerStats from './summoner-stats'
+import Summoner from './summoner'
 import api from './api'
+import { Container, Row, Col } from 'reactstrap'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <SummonerStats summoner={this.state.summoner} reset={this.reset} />
+      <Summoner summoner={this.state.summoner} reset={this.reset} />
     )
     return stats
   }
@@ -71,28 +72,22 @@ export default class App extends React.Component {
       return <div>{this.renderStats()}</div>
     }
     return (
-      <div className="container-fluid h-100">
-        <div className="row h-25" />
-        <div className="row">
-          <div className="col-4" />
-          <div className="col-4 text-center">
-            <img src="../../images/logo.png" className="img-fluid" />
-          </div>
-          <div className="col-4" />
-        </div>
-        <div className="row my-5">
-          <div className="col-4" />
-          <div className="col-4">
+      <Container className='h-100'>
+        <Row className='h-25'/>
+        <Row>
+          <Col className='text-center'>
+            <h1 className='text-light display-3'>LoL Stats</h1>
+          </Col>
+        </Row>
+        <Row className='mt-4'>
+          <Col />
+          <Col xs='5'>
             <Search input={this.handleInput} click={this.handleSearch} />
             {this.renderErrorMsg(invalidSearch)}
-          </div>
-          <div className="col-4" />
-        </div>
-        <div className="row my-5">
-          <div className="col-4" />
-          <div className="col-4" />
-        </div>
-      </div>
+          </Col>
+          <Col />
+        </Row>
+      </Container>
     )
   }
 }

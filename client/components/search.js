@@ -7,13 +7,13 @@ export default function Search(props) {
       <InputGroup>
         <Input
           type="text"
-          placeholder="Summoner"
+          placeholder="Summoner name"
           onInput={props.input}
         />
         <InputGroupAddon addonType="append">
           <Button
-            outline color="secondary"
             onClick={props.click}
+            type="button"
           >
             Search
           </Button>
