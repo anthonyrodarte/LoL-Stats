@@ -50,13 +50,22 @@ class Matches extends Component {
     }
     return matchResults
   }
+  getChampionIcon(key) {
+    const match = this.state.matchesDetails[key]
+    const playerId = this.getPlayerId(this.props.summoner.name, match)
+    const playerInfo = match.participants.find(player => player.participantId === playerId)
+    const champName = Object.keys(this.state.champData).filter(champName => {
+      return this.state.champData[champName].key === playerInfo.championId.toString()
+    })
+    const champImage = this.state.champData[champName[0]].image.full
+    return 'https://ddragon.leagueoflegends.com/cdn/8.13.1/img/champion/' + champImage
+  }
   render() {
-    console.log(this.state)
     const matchHistoryList =
       this.state.matchesResults.map((result, i) => (
         <Col key={i} className="pr-0">
           <Card inverse className="rounded">
-            <CardImg width="100%" src="../../../images/zed.jpeg"/>
+            <CardImg src={this.getChampionIcon(i)}/>
             <CardImgOverlay className="d-flex align-items-center justify-content-center">
               <CardTitle>{result}</CardTitle>
             </CardImgOverlay>
