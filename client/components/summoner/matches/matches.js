@@ -63,10 +63,10 @@ class Matches extends Component {
   render() {
     const matchHistoryList =
       this.state.matchesResults.map((result, i) => (
-        <Col key={i} className="pr-0">
+        <Col xs="2" key={i} className="px-0">
           <Card inverse className="rounded">
             <CardImg src={this.getChampionIcon(i)}/>
-            <CardImgOverlay className="d-flex align-items-center justify-content-center">
+            <CardImgOverlay className="d-flex align-items-center justify-content-around">
               <CardTitle>{result}</CardTitle>
             </CardImgOverlay>
           </Card>
