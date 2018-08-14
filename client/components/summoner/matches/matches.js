@@ -18,7 +18,7 @@ class Matches extends Component {
       )
   }
   getChampionIcon(key) {
-    const match = this.props.matchesDetails[key]
+    const match = this.props.Details[key]
     const playerId = this.props.getId(this.props.summoner.name, match)
     const playerInfo = match.participants.find(player => player.participantId === playerId)
     const champName = Object.keys(this.state.champData).filter(champName => {
@@ -29,7 +29,7 @@ class Matches extends Component {
   }
   render() {
     const matchHistoryList =
-      this.props.matchesResults.map((result, i) => (
+      this.props.Results.map((result, i) => (
         <Col key={i} className="pr-0">
           <Card inverse className="rounded">
             <CardImg src={this.getChampionIcon(i)}/>

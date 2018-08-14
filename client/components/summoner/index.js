@@ -64,10 +64,10 @@ export default class Summoner extends React.Component {
         </Row>
         <Row className="bg-light p-3">
           <SummonerInfo icon={`http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
-          <Matches matchesResults={this.state.matchesResults} matchesDetails={this.state.matchesDetails} summoner={this.props.summoner} getId={this.getPlayerId} />
+          <Matches Results={this.state.matchesResults} Details={this.state.matchesDetails} summoner={this.props.summoner} getId={this.getPlayerId} />
         </Row>
-        <Row>
-          <MatchStats/>
+        <Row className="mt-4">
+          <MatchStats Details={this.state.matchesDetails} Results={this.state.matchesResults}/>
         </Row>
       </Container>
     )
