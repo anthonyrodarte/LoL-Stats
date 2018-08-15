@@ -45,7 +45,11 @@ class Chart extends Component {
       <div className="chart">
         <HorizontalBar
           data={this.state.chartData}
-          options={{}}
+          options={{
+            legend: {
+              display: false
+            }
+          }}
         />
       </div>
     )
