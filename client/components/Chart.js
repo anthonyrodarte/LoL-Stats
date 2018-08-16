@@ -9,7 +9,6 @@ class Chart extends Component {
         labels: ['Zed', 'Akali', 'Jax', 'Janna', 'Nunu', 'Diana', 'Fizz', 'Blitzcrank', 'Swain', 'Nasus'],
         datasets: [
           {
-            label: 'Damage',
             data: [
               10000,
               12323,

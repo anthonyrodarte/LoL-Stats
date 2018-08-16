@@ -12,7 +12,9 @@ export default class Summoner extends React.Component {
       iconId: this.props.summoner.profileIconId,
       rank: null,
       matchesDetails: [],
-      matchesResults: []
+      matchesResults: [],
+      selectedMatch: 0,
+      chartData: {}
     }
   }
   componentDidMount() {
@@ -46,13 +48,16 @@ export default class Summoner extends React.Component {
         return participant.participantId === id
       })
       if (playerStats.stats.win) {
-        matchResults.push('Win')
+        matchResults.push('Won')
       }
       else {
-        matchResults.push('Loss')
+        matchResults.push('Lost')
       }
     }
     return matchResults
+  }
+  getMatchStats(match) {
+    console.log(this)
   }
   render() {
     return (
@@ -64,10 +69,10 @@ export default class Summoner extends React.Component {
         </Row>
         <Row className="bg-light p-3">
           <SummonerInfo icon={`http://ddragon.leagueoflegends.com/cdn/8.13.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
-          <Matches Results={this.state.matchesResults} Details={this.state.matchesDetails} summoner={this.props.summoner} getId={this.getPlayerId} />
+          <Matches results={this.state.matchesResults} details={this.state.matchesDetails} summoner={this.props.summoner} getId={this.getPlayerId} />
         </Row>
         <Row className="mt-4">
-          <MatchStats Details={this.state.matchesDetails} Results={this.state.matchesResults}/>
+          <MatchStats details={this.state.matchesDetails} results={this.state.matchesResults} match={this.state.selectedMatch} getStats={this.getMatchStats} getId={this.getPlayerId} summoner={this.props.summoner}/>
         </Row>
       </Container>
     )
