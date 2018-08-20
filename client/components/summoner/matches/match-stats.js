@@ -6,6 +6,7 @@ class MatchStats extends Component {
   render() {
     const matchInfo = this.props.details[this.props.match]
     if (matchInfo) {
+      const time = matchInfo.gameDuration
       const id = this.props.getId(this.props.summoner.name, matchInfo)
       const playerStats = matchInfo.participants[id - 1].stats
       const creepScore = playerStats.totalMinionsKilled + playerStats.neutralMinionsKilled
@@ -16,7 +17,7 @@ class MatchStats extends Component {
               <Row>
                 <Col>
                   <h4>{this.props.results[0]}
-                    <small className="text-muted"> ( 24m 00s )</small>
+                    <small className="text-muted"> ( {Math.floor(time / 60)}m {time % 60}s )</small>
                   </h4>
                 </Col>
               </Row>

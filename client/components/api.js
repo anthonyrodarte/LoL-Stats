@@ -33,7 +33,7 @@ const api = {
       })
   },
   icon() {
-    return fetch('https://ddragon.leagueoflegends.com/cdn/8.13.1/data/en_US/champion.json')
+    return fetch('https://ddragon.leagueoflegends.com/cdn/8.16.1/data/en_US/champion.json')
       .then(res => res.json())
       .then(champs => champs.data)
   }
