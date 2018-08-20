@@ -11,7 +11,7 @@ class MatchStats extends Component {
       const playerStats = matchInfo.participants[id - 1].stats
       const creepScore = playerStats.totalMinionsKilled + playerStats.neutralMinionsKilled
       return (
-        <Col className='bg-light mx-2 border border-dark'>
+        <Col className='bg-light mx-2'>
           <Row className='py-3'>
             <Col xs="4">
               <Row>
@@ -41,12 +41,12 @@ class MatchStats extends Component {
             <Col xs="8">
               <Row>
                 <Col>
-                  <h5>Damage by Champion</h5>
+                  <h5>Damage by Summoner</h5>
                 </Col>
               </Row>
               <Row className="mt-2">
                 <Col>
-                  <Chart />
+                  <Chart matchInfo={matchInfo}/>
                 </Col>
               </Row>
             </Col>

@@ -6,22 +6,10 @@ class Chart extends Component {
     super(props)
     this.state = {
       chartData: {
-        labels: ['Zed', 'Akali', 'Jax', 'Janna', 'Nunu', 'Diana', 'Fizz', 'Blitzcrank', 'Swain', 'Nasus'],
+        labels: this.props.matchInfo.participantIdentities.map(summoner => summoner.player.summonerName),
         datasets: [
           {
-            data: [
-              10000,
-              12323,
-              50000,
-              5000,
-              1000,
-              30212,
-              43242,
-              0,
-              21312,
-              20000
-
-            ],
+            data: this.props.matchInfo.participants.map(player => player.stats.totalDamageDealtToChampions),
             backgroundColor: [
               '#3991ef',
               '#5383e8',
@@ -40,6 +28,7 @@ class Chart extends Component {
     }
   }
   render() {
+    console.log(this.props)
     return (
       <div className="chart">
         <HorizontalBar
