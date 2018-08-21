@@ -3,7 +3,7 @@ import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap'
 
 export default function Search(props) {
   return (
-    <form>
+    <form onSubmit={props.click}>
       <InputGroup>
         <Input
           type="text"
