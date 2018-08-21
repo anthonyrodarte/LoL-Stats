@@ -16,10 +16,11 @@ export default class App extends React.Component {
     this.handleInput = this.handleInput.bind(this)
     this.reset = this.reset.bind(this)
   }
-  handleSearch() {
+  handleSearch(e) {
     this.setState({
       invalidSearch: null
     })
+    e.preventDefault()
     if (!this.state.input) {
       this.setState({
         invalidSearch: 'Please enter a summoner name.'
