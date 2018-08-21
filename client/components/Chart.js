@@ -27,8 +27,21 @@ class Chart extends Component {
       }
     }
   }
+  componentDidUpdate(oldProps) {
+    if (oldProps !== this.props) {
+      this.setState({
+        chartData: {
+          labels: this.props.matchInfo.participantIdentities.map(summoner => summoner.player.summonerName),
+          datasets: [
+            {
+              data: this.props.matchInfo.participants.map(player => player.stats.totalDamageDealtToChampions)
+            }
+          ]
+        }
+      })
+    }
+  }
   render() {
-    console.log(this.props)
     return (
       <div className="chart">
         <HorizontalBar

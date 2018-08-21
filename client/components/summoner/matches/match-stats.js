@@ -46,7 +46,7 @@ class MatchStats extends Component {
               </Row>
               <Row className="mt-2">
                 <Col>
-                  <Chart matchInfo={matchInfo}/>
+                  <Chart matchInfo={matchInfo} />
                 </Col>
               </Row>
             </Col>
