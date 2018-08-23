@@ -30,14 +30,23 @@ class Matches extends Component {
   render() {
     const matchHistoryList =
       this.props.results.map((result, i) => (
-        <Col key={i} className="pr-0" onClick={() => this.props.updateMatch(i)}>
-          <Card inverse className="rounded">
-            <CardImg src={this.getChampionIcon(i)}/>
-            <CardImgOverlay className="d-flex align-items-center justify-content-center">
-              <CardTitle>{result}</CardTitle>
-            </CardImgOverlay>
-          </Card>
-        </Col>
+        this.props.match === i
+          ? <Col key={i} className="pr-0" onClick={() => this.props.updateMatch(i)}>
+            <Card inverse className="rounded">
+              <CardImg src={this.getChampionIcon(i)} className="match"/>
+              <CardImgOverlay className="d-flex align-items-center justify-content-center">
+                <CardTitle>{result}</CardTitle>
+              </CardImgOverlay>
+            </Card>
+          </Col>
+          : <Col key={i} className="pr-0" onClick={() => this.props.updateMatch(i)}>
+            <Card inverse className="rounded">
+              <CardImg src={this.getChampionIcon(i)}/>
+              <CardImgOverlay className="d-flex align-items-center justify-content-center">
+                <CardTitle>{result}</CardTitle>
+              </CardImgOverlay>
+            </Card>
+          </Col>
       ))
     return (
       <Col>
