@@ -4,6 +4,7 @@ import SummonerInfo from './info'
 import Matches from './matches/matches'
 import MatchStats from './matches/match-stats'
 import { Container, Row, Col } from 'reactstrap'
+import Search from '../search'
 
 export default class Summoner extends React.Component {
   constructor(props) {
@@ -65,11 +66,14 @@ export default class Summoner extends React.Component {
     return (
       <Container className="p-3">
         <Row>
+          <Col className="d-flex align-items-center">
+            <h4 className="text-light m-0" onClick={this.props.reset}>LoL Stats</h4>
+          </Col>
           <Col>
-            <h4 className="text-light" onClick={this.props.reset}>LoL Stats</h4>
+            <Search />
           </Col>
         </Row>
-        <Row className="bg-light p-3">
+        <Row className="bg-light p-3 mt-3">
           <SummonerInfo icon={`https://ddragon.leagueoflegends.com/cdn/8.16.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
           <Matches results={this.state.matchesResults} details={this.state.matchesDetails} summoner={this.props.summoner} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} match={this.state.selectedMatch}/>
         </Row>
