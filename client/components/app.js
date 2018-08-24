@@ -10,7 +10,10 @@ export default class App extends React.Component {
     this.state = {
       input: '',
       summoner: null,
-      invalidSearch: null
+      invalidSearch: null,
+      rank: null,
+      matchesDetails: [],
+      matchesResults: []
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -36,8 +39,23 @@ export default class App extends React.Component {
           return
         }
         this.setState({
-          summoner: summoner
+          input: '',
+          summoner: summoner,
+          invalidSeach: null
         })
+        api.rank(summoner.id)
+          .then(rank =>
+            this.setState({
+              rank: rank[0]
+            })
+          )
+        api.matches(summoner.accountId)
+          .then(matchesJSON =>
+            this.setState({
+              matchesDetails: matchesJSON,
+              matchesResults: this.getMatchResults(summoner.name, matchesJSON)
+            })
+          )
       })
   }
   reset() {
@@ -46,6 +64,30 @@ export default class App extends React.Component {
       summoner: null,
       invalidSearch: null
     })
+  }
+  getMatchResults(name, matches) {
+    let matchResults = []
+    for (let i = 0; i < matches.length; i++) {
+      const id = this.getPlayerId(this.state.summoner.name, matches[i])
+      const playerStats = matches[i].participants.find(participant => {
+        return participant.participantId === id
+      })
+      if (playerStats.stats.win) {
+        matchResults.push('Won')
+      }
+      else {
+        matchResults.push('Lost')
+      }
+    }
+    return matchResults
+  }
+  getPlayerId(name, match) {
+    const identities = match.participantIdentities
+    const identity = identities.find(player => {
+      return player.player.summonerName === name
+    })
+    const id = identity.participantId
+    return id
   }
   handleInput(event) {
     this.setState({ input: event.target.value })
@@ -62,7 +104,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <Summoner summoner={this.state.summoner} reset={this.reset} />
+      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId}/>
     )
     return stats
   }
