@@ -113,7 +113,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} selectedMatch={this.state.selectedMatch}/>
+      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} selectedMatch={this.state.selectedMatch} rank={this.state.rank}/>
     )
     return stats
   }
