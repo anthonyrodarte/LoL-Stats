@@ -24,7 +24,7 @@ export default class Summoner extends React.Component {
           </Col>
         </Row>
         <Row className="bg-light p-3 mt-3">
-          <SummonerInfo icon={`https://ddragon.leagueoflegends.com/cdn/8.16.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
+          <SummonerInfo icon={`https://ddragon.leagueoflegends.com/cdn/8.16.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.props.rank} level={this.props.summoner.summonerLevel} />
           <Matches results={this.props.results} details={this.props.details} summoner={this.props.summoner} getId={this.props.getId} updateMatch={this.props.updateMatch} match={this.props.selectedMatch}/>
         </Row>
         <Row className="mt-4">
