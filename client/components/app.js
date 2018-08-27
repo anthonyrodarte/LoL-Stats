@@ -13,11 +13,13 @@ export default class App extends React.Component {
       invalidSearch: null,
       rank: null,
       matchesDetails: [],
-      matchesResults: []
+      matchesResults: [],
+      selectedMatch: 0
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.reset = this.reset.bind(this)
+    this.updateSelectedMatch = this.updateSelectedMatch.bind(this)
   }
   handleSearch(e) {
     this.setState({
@@ -41,19 +43,21 @@ export default class App extends React.Component {
         this.setState({
           input: '',
           summoner: summoner,
-          invalidSeach: null
+          invalidSeach: null,
+          matchesDetails: [],
+          matchesResults: []
         })
-        api.rank(summoner.id)
-          .then(rank =>
-            this.setState({
-              rank: rank[0]
-            })
-          )
         api.matches(summoner.accountId)
           .then(matchesJSON =>
             this.setState({
               matchesDetails: matchesJSON,
               matchesResults: this.getMatchResults(summoner.name, matchesJSON)
+            })
+          )
+        api.rank(summoner.id)
+          .then(rank =>
+            this.setState({
+              rank: rank[0]
             })
           )
       })
@@ -65,10 +69,15 @@ export default class App extends React.Component {
       invalidSearch: null
     })
   }
+  updateSelectedMatch(matchIndex) {
+    this.setState({
+      selectedMatch: matchIndex
+    })
+  }
   getMatchResults(name, matches) {
     let matchResults = []
     for (let i = 0; i < matches.length; i++) {
-      const id = this.getPlayerId(this.state.summoner.name, matches[i])
+      const id = this.getPlayerId(name, matches[i])
       const playerStats = matches[i].participants.find(participant => {
         return participant.participantId === id
       })
@@ -104,7 +113,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId}/>
+      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} selectedMatch={this.state.selectedMatch}/>
     )
     return stats
   }
