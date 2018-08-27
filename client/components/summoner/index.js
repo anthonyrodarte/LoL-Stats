@@ -9,15 +9,8 @@ export default class Summoner extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      iconId: this.props.summoner.profileIconId,
-      selectedMatch: 0
+      iconId: this.props.summoner.profileIconId
     }
-    this.updateSelectedMatch = this.updateSelectedMatch.bind(this)
-  }
-  updateSelectedMatch(matchIndex) {
-    this.setState({
-      selectedMatch: matchIndex
-    })
   }
   render() {
     return (
@@ -32,10 +25,10 @@ export default class Summoner extends React.Component {
         </Row>
         <Row className="bg-light p-3 mt-3">
           <SummonerInfo icon={`https://ddragon.leagueoflegends.com/cdn/8.16.1/img/profileicon/${this.state.iconId}.png`} summoner={this.props.summoner} rank={this.state.rank} level={this.props.summoner.summonerLevel} />
-          <Matches results={this.props.results} details={this.props.details} summoner={this.props.summoner} getId={this.props.getId} updateMatch={this.updateSelectedMatch} match={this.state.selectedMatch}/>
+          <Matches results={this.props.results} details={this.props.details} summoner={this.props.summoner} getId={this.props.getId} updateMatch={this.props.updateMatch} match={this.props.selectedMatch}/>
         </Row>
         <Row className="mt-4">
-          <MatchStats details={this.props.details} results={this.props.results} match={this.state.selectedMatch} getId={this.props.getId} summoner={this.props.summoner}/>
+          <MatchStats details={this.props.details} results={this.props.results} match={this.props.selectedMatch} getId={this.props.getId} summoner={this.props.summoner}/>
         </Row>
       </Container>
     )
