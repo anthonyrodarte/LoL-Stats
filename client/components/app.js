@@ -14,7 +14,8 @@ export default class App extends React.Component {
       rank: null,
       matchesDetails: [],
       matchesResults: [],
-      selectedMatch: 0
+      selectedMatch: 0,
+      champData: null
     }
     this.handleSearch = this.handleSearch.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -60,6 +61,13 @@ export default class App extends React.Component {
               rank: rank[0]
             })
           )
+        api.icon()
+          .then(champs =>
+            this.setState({
+              champData: champs
+            })
+          )
+          .then(console.log(this.state.champData))
       })
   }
   reset() {
@@ -113,7 +121,7 @@ export default class App extends React.Component {
   }
   renderStats() {
     const stats = (
-      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} selectedMatch={this.state.selectedMatch} rank={this.state.rank}/>
+      <Summoner summoner={this.state.summoner} reset={this.reset} input={this.handleInput} click={this.handleSearch} details={this.state.matchesDetails} results={this.state.matchesResults} getId={this.getPlayerId} updateMatch={this.updateSelectedMatch} selectedMatch={this.state.selectedMatch} rank={this.state.rank} champData={this.state.champData} />
     )
     return stats
   }
