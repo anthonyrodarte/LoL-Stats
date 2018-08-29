@@ -1,30 +1,15 @@
 import React, { Component } from 'react'
-import api from '../../api'
 import { Row, Col, Card, CardTitle, CardImg, CardImgOverlay } from 'reactstrap'
 
 class Matches extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      champData: null
-    }
-  }
-  componentDidMount() {
-    api.icon()
-      .then(champs =>
-        this.setState({
-          champData: champs
-        })
-      )
-  }
   getChampionIcon(key) {
     const match = this.props.details[key]
     const playerId = this.props.getId(this.props.summoner.name, match)
     const playerInfo = match.participants.find(player => player.participantId === playerId)
-    const champName = Object.keys(this.state.champData).filter(champName => {
-      return this.state.champData[champName].key === playerInfo.championId.toString()
+    const champName = Object.keys(this.props.champData).filter(champName => {
+      return this.props.champData[champName].key === playerInfo.championId.toString()
     })
-    const champImage = this.state.champData[champName[0]].image.full
+    const champImage = this.props.champData[champName[0]].image.full
     return 'https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/' + champImage
   }
   render() {
