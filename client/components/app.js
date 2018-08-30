@@ -133,19 +133,22 @@ export default class App extends React.Component {
     }
     return (
       <Container className='h-100'>
-        <Row className='h-25'/>
-        <Row>
-          <Col className='text-center'>
-            <h1 className='text-light display-3'>LoL Stats</h1>
+        <Row className='h-50 d-flex align-items-end'>
+          <Col>
+            <Row>
+              <Col className='text-center'>
+                <h1 className='text-light display-2'>LoL Stats</h1>
+              </Col>
+            </Row>
+            <Row className='mt-4'>
+              <Col />
+              <Col xs='8' lg='5'>
+                <Search input={this.handleInput} click={this.handleSearch} />
+                {this.renderErrorMsg(invalidSearch)}
+              </Col>
+              <Col />
+            </Row>
           </Col>
-        </Row>
-        <Row className='mt-4'>
-          <Col />
-          <Col xs='5'>
-            <Search input={this.handleInput} click={this.handleSearch} />
-            {this.renderErrorMsg(invalidSearch)}
-          </Col>
-          <Col />
         </Row>
       </Container>
     )
