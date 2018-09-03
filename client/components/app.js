@@ -67,7 +67,6 @@ export default class App extends React.Component {
               champData: champs
             })
           )
-          .then(console.log(this.state.champData))
       })
   }
   reset() {
