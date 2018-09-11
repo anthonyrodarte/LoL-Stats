@@ -55,7 +55,11 @@ class MatchStats extends Component {
       )
     }
     else {
-      return <div />
+      return (
+        <Col className='bg-light mx-2 text-center'>
+          <h4>Loading Stats</h4>
+        </Col>
+      )
     }
   }
 }
