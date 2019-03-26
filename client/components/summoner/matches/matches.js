@@ -10,7 +10,7 @@ class Matches extends Component {
       return this.props.champData[champName].key === playerInfo.championId.toString()
     })
     const champImage = this.props.champData[champName[0]].image.full
-    return 'https://ddragon.leagueoflegends.com/cdn/8.16.1/img/champion/' + champImage
+    return 'https://ddragon.leagueoflegends.com/cdn/9.6.1/img/champion/' + champImage
   }
   render() {
     const matchHistoryList =
