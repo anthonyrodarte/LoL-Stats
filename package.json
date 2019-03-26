@@ -4,7 +4,7 @@
   "description": "A web application for summoners who want to view their statistics.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run bundle && node server/index.js",
+    "postinstall": "npm run bundle && node server/index.js",
     "test": "mocha",
     "tdd": "mocha -w -R min",
     "cover": "nyc npm test",
