@@ -6,7 +6,7 @@ const apiKeyURL = '?api_key=' + process.env.API_KEY
 
 const riot = {
   getMatchHistory(id, callback) {
-    const getMatchHistoryUrl = '/lol/match/v3/matchlists/by-account/'
+    const getMatchHistoryUrl = '/lol/match/v4/matchlists/by-account/'
     const url = baseUrl + getMatchHistoryUrl + id + apiKeyURL
     request(url, { json: true }, (err, response, body) => {
       if (err) return callback(err)
@@ -14,7 +14,7 @@ const riot = {
     })
   },
   getMatch(id, callback) {
-    const getMatchUrl = '/lol/match/v3/matches/'
+    const getMatchUrl = '/lol/match/v4/matches/'
     const url = baseUrl + getMatchUrl + id + apiKeyURL
     request(url, { json: true }, (err, response, body) => {
       if (err) return callback(err)
@@ -22,7 +22,7 @@ const riot = {
     })
   },
   getRank(id, callback) {
-    const getRankUrl = '/lol/league/v3/positions/by-summoner/'
+    const getRankUrl = '/lol/league/v4/positions/by-summoner/'
     const url = baseUrl + getRankUrl + id + apiKeyURL
     request(url, { json: true }, (err, response, body) => {
       if (err) return callback(err)
@@ -30,7 +30,7 @@ const riot = {
     })
   },
   getSummoner(name, callback) {
-    const getSummonerUrl = '/lol/summoner/v3/summoners/by-name/'
+    const getSummonerUrl = '/lol/summoner/v4/summoners/by-name/'
     const url = baseUrl + getSummonerUrl + name + apiKeyURL
     request(url, { json: true }, (err, response, body) => {
       if (err) return callback(err)
