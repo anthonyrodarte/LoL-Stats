@@ -1,6 +1,6 @@
 {
   "name": "LoL-Stats",
-  "version": "1.0.0",
+  "version": "v8.11.1",
   "description": "A web application for summoners who want to view their statistics.",
   "main": "index.js",
   "scripts": {
