@@ -1,8 +1,11 @@
 {
   "name": "LoL-Stats",
-  "version": "v8.11.1",
+  "version": "1.0.0",
   "description": "A web application for summoners who want to view their statistics.",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.1"
+  },
   "scripts": {
     "postinstall": "npm run bundle && node server/index.js",
     "test": "mocha",
